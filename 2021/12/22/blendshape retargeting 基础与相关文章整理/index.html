@@ -4,11 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 晚风的日常小屋">
-    <meta name="description" content="出发2021年冬至。
-第一篇献给Hello World。
-放弃CSDN，转战Hexo，希望自己可以坚持下来，产出一些真正有用的内容。
-">
+    <meta name="keywords" content="晚风的日常小屋">
+    <meta name="description" content="Blendshape Retargeting 入门笔记前言
+这里的blendshape指的是人脸模型表情的表示方式，所以这是一篇关于模型表情的笔记
+本篇笔记主要关注算法上的实现，而不是CG或3D软件，如maya，ue等软件上的实现。定义Bl">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 晚风的日常小屋</title>
+    <title>晚风的日常小屋</title>
     <link rel="icon" type="image/png" href="/pugongying.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -205,12 +204,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -324,25 +323,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">
-                                <span class="chip bg-color">碎碎念</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E6%97%A5%E5%B8%B8/" class="post-category">
-                                日常
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -351,14 +337,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-12-21
+                    2021-12-22
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-21
+                    2021-12-22
                 </div>
                 
 
@@ -382,9 +368,42 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="出发"><a href="#出发" class="headerlink" title="出发"></a>出发</h2><p>2021年冬至。</p>
-<p>第一篇献给Hello World。</p>
-<p>放弃CSDN，转战Hexo，希望自己可以坚持下来，产出一些真正有用的内容。</p>
+                <h1 id="Blendshape-Retargeting-入门笔记"><a href="#Blendshape-Retargeting-入门笔记" class="headerlink" title="Blendshape Retargeting 入门笔记"></a>Blendshape Retargeting 入门笔记</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>这里的blendshape指的是人脸模型表情的表示方式，所以这是一篇关于模型表情的笔记</li>
+<li>本篇笔记主要关注算法上的实现，而不是CG或3D软件，如maya，ue等软件上的实现。<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2>Blendshape Retargeting,  被称为<strong>表情重定向</strong>问题，指的是将一个人脸模型的表情迁移到另一个模型上。包括真实人脸的表情迁移到3D人脸模型上，或者把A人脸模型的表情迁移到B人脸模型上。比如电影中，用真人来驱动阿凡达的脸部表情，就是一个表情重定向的过程。PS：在这里，默认为人脸模型的表情由Blendshape驱动。</li>
+</ul>
+<p><strong>TODO</strong>：放图</p>
+<h2 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h2><h4 id="1-表情和Blendshape的关系"><a href="#1-表情和Blendshape的关系" class="headerlink" title="1. 表情和Blendshape的关系"></a>1. 表情和Blendshape的关系</h4><ul>
+<li>现在业界在做表情动画时，都是基于blendshape或者骨骼来实现，大部分还是偏向用blendshape来做表情，因为操作起来会更方便一些。</li>
+<li>每个模型会做一系列的基表情，比如闭眼、张嘴等，这样，从一个自然的表情到闭眼的基表情之间，做一个blendshape，就形成了眨眼的表情动画效果。</li>
+</ul>
+<p><strong>TODO</strong>：补基表情的图</p>
+<ul>
+<li>blendshape和表情动画的数学表示<ul>
+<li>将表情模型看做<code>$N$</code>个表情基模型：<code>$B=[b_0,...,b_N]$</code>, <code>$b_0$</code>可以看作无任何表情的中性表情。每一个基表情都会对应一个表情系数<code>$E=[e_0,...,e_N]$</code>，组合起来就形成了各种各样的表情：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F = b_0+\sum^&#123;N&#125;_&#123;i&#125;e_i(b_i-b_0), e_i\in[0,1]</span><br></pre></td></tr></table></figure>
+<h4 id="2-常用的blendshape标准"><a href="#2-常用的blendshape标准" class="headerlink" title="2. 常用的blendshape标准"></a>2. 常用的blendshape标准</h4></li>
+</ul>
+</li>
+<li>通用的是51维blendshape<ul>
+<li>包括eyeblink, eyeopen, jawopen, liptogether等维度</li>
+</ul>
+</li>
+<li>苹果标准<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/arkit/arfaceanchor/2928251-blendshapes">https://developer.apple.com/documentation/arkit/arfaceanchor/2928251-blendshapes</a><h4 id="3-拓扑结构是什么"><a href="#3-拓扑结构是什么" class="headerlink" title="3. 拓扑结构是什么"></a>3. 拓扑结构是什么</h4></li>
+</ul>
+</li>
+<li>拓扑结构一般指顶点数、三角面片数和三角面片连接关系<h4 id="4-稀疏表示和稀疏编码"><a href="#4-稀疏表示和稀疏编码" class="headerlink" title="4. 稀疏表示和稀疏编码"></a>4. 稀疏表示和稀疏编码</h4></li>
+<li>有时会遇到稀疏表示的问题，可以参考下列文章</li>
+<li><a target="_blank" rel="noopener" href="https://www.pianshen.com/article/74041446901/">https://www.pianshen.com/article/74041446901/</a></li>
+</ul>
+<h2 id="一些有用的文章或博客"><a href="#一些有用的文章或博客" class="headerlink" title="一些有用的文章或博客"></a>一些有用的文章或博客</h2><h3 id="论文："><a href="#论文：" class="headerlink" title="论文："></a>论文：</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://www.scribblethink.org/Work/Pdfs/blendshapes_MAIN.pdf">Practice and Theory of Blendshape Facial Models</a>（入门级文章，主要讲解blendshape的一些基本知识）</li>
+<li><a target="_blank" rel="noopener" href="http://www.cs.unc.edu/~jdh/documents/thesis_master.pdf">基于变形迁移的表情克隆及其应用</a>（中科院硕士论文，可以当基础知识来看）<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zb1165048017/article/details/115491531">卡通角色表情驱动系列一
+</a>  （讲解表情驱动的博客）</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zb1165048017/article/details/118864029">卡通角色表情驱动系列二
+</a>  （讲解网格变形的博客）</li>
+</ul>
 
                 
             </div>
@@ -411,7 +430,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://vincentgc.github.io/2021/12/21/Hello%20World/">http://vincentgc.github.io/2021/12/21/Hello%20World/</a>
+                    <a href="http://vincentgc.github.io/2021/12/22/blendshape%20retargeting%20%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0%E6%95%B4%E7%90%86/">http://vincentgc.github.io/2021/12/22/blendshape%20retargeting%20%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0%E6%95%B4%E7%90%86/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -448,11 +467,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">
-                                    <span class="chip bg-color">碎碎念</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -496,9 +511,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/12/22/blendshape%20retargeting%20%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0%E6%95%B4%E7%90%86/">
                     <div class="card-image">
@@ -516,9 +532,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -527,6 +543,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -534,7 +551,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2021/12/21/Hello%20World/">
@@ -568,7 +585,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
