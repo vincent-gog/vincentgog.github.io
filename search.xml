@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>关于Ubuntu下ping不通局域网的问题</title>
+      <link href="/2021/12/24/%E5%85%B3%E4%BA%8EUbuntu%E4%B8%8Bping%E4%B8%8D%E9%80%9A%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2021/12/24/%E5%85%B3%E4%BA%8EUbuntu%E4%B8%8Bping%E4%B8%8D%E9%80%9A%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题出现背景"><a href="#问题出现背景" class="headerlink" title="问题出现背景"></a>问题出现背景</h2><p>使用synergy软件，可以用一套键鼠控制不同的两台电脑（win+linux），但是前提是两台电脑需要连接到同一局域网中。</p><p>具体情况信息：</p><blockquote><p>无线连接<br>Linux的IP地址：192.168.1.148<br>Win的IP地址：192.168.1.110<br>Linux和Win的防火墙均关闭</p></blockquote><p>在具体的操作过程中，出现了很奇怪的现象：在Ubuntu下，在终端<code>Ping 192.168.1.110</code>会出现 <code>From 192.168.1.1 icmp_seq=1 Destination Host Unreachable</code>，即在Linux下连不通内网，但是上外网是可以的。<br>当然，Linux下<code>Ping 192.168.1.148</code>（自己）是正常的。</p><h2 id="问题分析及解决"><a href="#问题分析及解决" class="headerlink" title="问题分析及解决"></a>问题分析及解决</h2><p>在终端下输入<code>arp -a</code>，会出现</p><pre><code>?(192.168.1.110) 位于 &lt;incomplete&gt; 在 eth1?(192.168.1.148) 位于&lt;incomplete&gt; 在 eth1?(192.168.1.1) 位于 b0:---0d [ether] 在 wlan1</code></pre><p>虽然不知道具体表达什么意思，似乎内网其他ip地址不是在合适的地方，网卡eth1出来捣乱了。所以我把eth1禁用试了一下：<code>sudo ifconfig eth1 down</code>，再执行<code>arp -a</code>会显示</p><pre><code>?(192.168.1.110) 位于 40:--:7b [ether] 在 wlan1?(192.168.1.1) 位于 b0:---0d [ether] 在 wlan1</code></pre><p>结果再执行<code>ping 192.168.1.110</code>就可以ping通了。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>解决Ping不通的问题，需要考虑的方向：</p><blockquote><ol><li>防火墙问题，是否关闭了 </li><li>网卡问题，是否别的网卡影响无线网卡 </li><li>局域网问题，确保路由器正常或两台电脑确定连在同一路由器上，确保网段一致</li></ol></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Debug </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>图像序列转成视频文件-Python代码</title>
       <link href="/2021/12/23/%E5%9B%BE%E5%83%8F%E5%BA%8F%E5%88%97%E8%BD%AC%E6%88%90%E8%A7%86%E9%A2%91-%E4%BB%A3%E7%A0%81/"/>
       <url>/2021/12/23/%E5%9B%BE%E5%83%8F%E5%BA%8F%E5%88%97%E8%BD%AC%E6%88%90%E8%A7%86%E9%A2%91-%E4%BB%A3%E7%A0%81/</url>
