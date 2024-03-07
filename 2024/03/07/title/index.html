@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="图像序列转成视频文件-Python代码, 晚风的日常小屋">
-    <meta name="description" content="由一组图片序列文件，转化成mp4等视频文件的python代码分享">
+    <meta name="keywords" content="title, 晚风的日常小屋">
+    <meta name="description" content="hello qexo
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>图像序列转成视频文件-Python代码 | 晚风的日常小屋</title>
+    <title>title | 晚风的日常小屋</title>
     <link rel="icon" type="image/png" href="/luoye.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -229,7 +230,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">图像序列转成视频文件-Python代码</h1>
+                    <h1 class="description center-align post-title">title</h1>
                 </div>
             </div>
         </div>
@@ -343,29 +344,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/python/">
-                                <span class="chip bg-color">python</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%9B%BE%E5%83%8F/">
-                                <span class="chip bg-color">图像</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E4%BB%A3%E7%A0%81/" class="post-category">
-                                代码
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -374,14 +358,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-12-23
+                    2024-03-07
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-23
+                    2024-03-07
                 </div>
                 
 
@@ -408,139 +392,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>把一组带有图片序列文件的文件夹，用python合成视频文件，并可以对图片序列文件进行排序，防止合成错乱。</p>
-<h2 id="依赖库"><a href="#依赖库" class="headerlink" title="依赖库"></a>依赖库</h2><ul>
-<li>opencv-python</li>
-<li>unicodedata</li>
-</ul>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># coding:utf-8</span>
-<span class="token keyword">import</span> cv2
-<span class="token keyword">import</span> os
-
-<span class="token comment"># 获取当前目录</span>
-os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>split<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>realpath<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token keyword">def</span> <span class="token function">is_number</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""判断是不是数字
-    """</span>
-    <span class="token keyword">try</span><span class="token punctuation">:</span>
-        <span class="token builtin">float</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> <span class="token boolean">True</span>
-    <span class="token keyword">except</span> ValueError<span class="token punctuation">:</span>
-        <span class="token keyword">pass</span>
- 
-    <span class="token keyword">try</span><span class="token punctuation">:</span>
-        <span class="token keyword">import</span> unicodedata
-        unicodedata<span class="token punctuation">.</span>numeric<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> <span class="token boolean">True</span>
-    <span class="token keyword">except</span> <span class="token punctuation">(</span>TypeError<span class="token punctuation">,</span> ValueError<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">pass</span>
- 
-    <span class="token keyword">return</span> <span class="token boolean">False</span>
- 
- 
-<span class="token keyword">def</span> <span class="token function">find_continuous_num</span><span class="token punctuation">(</span>astr<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""寻找连续数字
-    """</span>
-    num <span class="token operator">=</span> <span class="token string">''</span>
-    <span class="token keyword">try</span><span class="token punctuation">:</span>
-        <span class="token keyword">while</span> <span class="token keyword">not</span> is_number<span class="token punctuation">(</span>astr<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">and</span> c <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>astr<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            c <span class="token operator">+=</span> <span class="token number">1</span>
-        <span class="token keyword">while</span> is_number<span class="token punctuation">(</span>astr<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">and</span> c <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>astr<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            num <span class="token operator">+=</span> astr<span class="token punctuation">[</span>c<span class="token punctuation">]</span>
-            c <span class="token operator">+=</span> <span class="token number">1</span>
-    <span class="token keyword">except</span><span class="token punctuation">:</span>
-        <span class="token keyword">pass</span>
-    <span class="token keyword">if</span> num <span class="token operator">!=</span> <span class="token string">''</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token builtin">int</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
- 
- 
-<span class="token keyword">def</span> <span class="token function">comp2filename</span><span class="token punctuation">(</span>file1<span class="token punctuation">,</span> file2<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""比较文件名称
-    """</span>
-    smaller_length <span class="token operator">=</span> <span class="token builtin">min</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>file1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>file2<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> c <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> smaller_length<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> <span class="token keyword">not</span> is_number<span class="token punctuation">(</span>file1<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token keyword">not</span> is_number<span class="token punctuation">(</span>file2<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token comment"># print('both not number')</span>
-            <span class="token keyword">if</span> file1<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">&lt;</span> file2<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">:</span>
-                <span class="token keyword">return</span> <span class="token boolean">True</span>
-            <span class="token keyword">if</span> file1<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">></span> file2<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">:</span>
-                <span class="token keyword">return</span> <span class="token boolean">False</span>
-            <span class="token keyword">if</span> file1<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">==</span> file2<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">:</span>
-                <span class="token keyword">if</span> c <span class="token operator">==</span> smaller_length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">:</span>
-                    <span class="token comment"># print('the last bit')</span>
-                    <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>file1<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>file2<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                        <span class="token keyword">return</span> <span class="token boolean">True</span>
-                    <span class="token keyword">else</span><span class="token punctuation">:</span>
-                        <span class="token keyword">return</span> <span class="token boolean">False</span>
-                <span class="token keyword">else</span><span class="token punctuation">:</span>
-                    <span class="token keyword">continue</span>
-        <span class="token keyword">if</span> is_number<span class="token punctuation">(</span>file1<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token keyword">not</span> is_number<span class="token punctuation">(</span>file2<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> <span class="token boolean">True</span>
-        <span class="token keyword">if</span> <span class="token keyword">not</span> is_number<span class="token punctuation">(</span>file1<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">and</span> is_number<span class="token punctuation">(</span>file2<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> <span class="token boolean">False</span>
-        <span class="token keyword">if</span> is_number<span class="token punctuation">(</span>file1<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">and</span> is_number<span class="token punctuation">(</span>file2<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span> find_continuous_num<span class="token punctuation">(</span>file1<span class="token punctuation">,</span> c<span class="token punctuation">)</span> <span class="token operator">&lt;</span> find_continuous_num<span class="token punctuation">(</span>file2<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                <span class="token keyword">return</span> <span class="token boolean">True</span>
-            <span class="token keyword">else</span><span class="token punctuation">:</span>
-                <span class="token keyword">return</span> <span class="token boolean">False</span>
-            
-<span class="token keyword">def</span> <span class="token function">sort_insert_filename</span><span class="token punctuation">(</span>file_list<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""对文件名称进行排序，保证数字的连续性
-    """</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>file_list<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        x <span class="token operator">=</span> file_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
-        j <span class="token operator">=</span> i
-        <span class="token keyword">while</span> j <span class="token operator">></span> <span class="token number">0</span> <span class="token keyword">and</span> comp2filename<span class="token punctuation">(</span>x<span class="token punctuation">,</span> file_list<span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            file_list<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> file_list<span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
-            j <span class="token operator">-=</span> <span class="token number">1</span>
-        file_list<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> x
-    <span class="token keyword">return</span> file_list
-
-<span class="token keyword">def</span> <span class="token function">img2video</span><span class="token punctuation">(</span>img_root<span class="token punctuation">,</span> dst_name<span class="token punctuation">,</span> fps<span class="token operator">=</span><span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""将一组图片序列转化为视频文件
-
-    Args:
-        img_root (str): 图片序列的文件夹地址
-        dst_name ([type]): 输出的视频文件地址
-        fps (int, optional): 输出视频序列的帧数. Defaults to 24.
-    """</span>
-    img_list <span class="token operator">=</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>image_root<span class="token punctuation">)</span>
-    img_list <span class="token operator">=</span> sort_insert_filename<span class="token punctuation">(</span>img_list<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>img_list<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>img_list<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
-        <span class="token comment"># 检测图片的长和宽</span>
-        img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>image_root<span class="token punctuation">,</span> img_list<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        w<span class="token punctuation">,</span>h <span class="token operator">=</span> img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">raise</span> Exception<span class="token punctuation">(</span><span class="token string">"no image in &#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>image_root<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-    fps <span class="token operator">=</span> fps
-    fourcc <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoWriter_fourcc<span class="token punctuation">(</span><span class="token operator">*</span><span class="token string">'XVID'</span><span class="token punctuation">)</span>
-    video_writer <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoWriter<span class="token punctuation">(</span>filename<span class="token operator">=</span>dst_name<span class="token punctuation">,</span> fourcc<span class="token operator">=</span>fourcc<span class="token punctuation">,</span> fps<span class="token operator">=</span>fps<span class="token punctuation">,</span> frameSize<span class="token operator">=</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span>h<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">for</span> img_path <span class="token keyword">in</span> img_list<span class="token punctuation">:</span>
-        <span class="token comment"># 逐张写入视频</span>
-        path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>image_root<span class="token punctuation">,</span> img_path<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>exists<span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment">#判断图片是否存在</span>
-            img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>filename<span class="token operator">=</span>path<span class="token punctuation">)</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token keyword">continue</span>
-        cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
-        video_writer<span class="token punctuation">.</span>write<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>img_path <span class="token operator">+</span> <span class="token string">' done!'</span><span class="token punctuation">)</span>
-    video_writer<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    image_root <span class="token operator">=</span> <span class="token string">'./test_img/'</span>
-    dst_name <span class="token operator">=</span> <span class="token string">'./test_img.mp4'</span>
-    fps <span class="token operator">=</span> <span class="token number">24</span>
-    img2video<span class="token punctuation">(</span>image_root<span class="token punctuation">,</span>dst_name<span class="token punctuation">,</span>fps<span class="token operator">=</span>fps<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'finished'</span><span class="token punctuation">)</span>
-
-    <span class="token comment"># 测试文件列表排序</span>
-    <span class="token comment"># print(sort_insert_filename(['a09', 'a2', 'b2', 'a10','a100', 'a01', 'a010', '_a3', 'a893', 'a90']))</span></code></pre>
+                <p>hello qexo</p>
 
                 
             </div>
@@ -567,7 +419,7 @@ os<span class="token punctuation">.</span>chdir<span class="token punctuation">(
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://vincentgc.github.io/2021/12/23/%E5%9B%BE%E5%83%8F%E5%BA%8F%E5%88%97%E8%BD%AC%E6%88%90%E8%A7%86%E9%A2%91-%E4%BB%A3%E7%A0%81/">http://vincentgc.github.io/2021/12/23/%E5%9B%BE%E5%83%8F%E5%BA%8F%E5%88%97%E8%BD%AC%E6%88%90%E8%A7%86%E9%A2%91-%E4%BB%A3%E7%A0%81/</a>
+                    <a href="http://vincentgc.github.io/2024/03/07/title/">http://vincentgc.github.io/2024/03/07/title/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -604,15 +456,7 @@ os<span class="token punctuation">.</span>chdir<span class="token punctuation">(
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/python/">
-                                    <span class="chip bg-color">python</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%9B%BE%E5%83%8F/">
-                                    <span class="chip bg-color">图像</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -655,7 +499,7 @@ os<span class="token punctuation">.</span>chdir<span class="token punctuation">(
         repo: 'gittalk_repo',
         owner: 'vincentgc',
         admin: "vincentgc",
-        id: '2021-12-23T19-25-00',
+        id: '2024-03-07T19-01-26',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -683,53 +527,39 @@ os<span class="token punctuation">.</span>chdir<span class="token punctuation">(
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/12/24/%E5%85%B3%E4%BA%8EUbuntu%E4%B8%8Bping%E4%B8%8D%E9%80%9A%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <a href="/2024/03/07/title/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="关于Ubuntu下ping不通局域网的问题">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="title">
                         
-                        <span class="card-title">关于Ubuntu下ping不通局域网的问题</span>
+                        <span class="card-title">title</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            linux出现连不通内网的情况说明和解决办法
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-07
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
-                                    技术
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Vincent
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
-                    </a>
-                    
-                    <a href="/tags/Debug/">
-                        <span class="chip bg-color">Debug</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -737,52 +567,37 @@ os<span class="token punctuation">.</span>chdir<span class="token punctuation">(
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2021/12/22/blendshape%20retargeting%20%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0%E6%95%B4%E7%90%86/">
+                <a href="/2024/03/07/title/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Blendshape Retargeting 入门笔记">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="title">
                         
-                        <span class="card-title">Blendshape Retargeting 入门笔记</span>
+                        <span class="card-title">title</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            表情重定向的一些笔记
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-07
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
-                                    技术
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Vincent
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%9C%AA%E5%AE%8C%E5%B7%A5/">
-                        <span class="chip bg-color">未完工</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%A1%A8%E6%83%85%E5%8A%A8%E7%94%BB/">
-                        <span class="chip bg-color">表情动画</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -921,7 +736,7 @@ os<span class="token punctuation">.</span>chdir<span class="token punctuation">(
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2022</span>
+                <span id="year">2021-2024</span>
             
             <a href="/about" target="_blank">Vincent</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
